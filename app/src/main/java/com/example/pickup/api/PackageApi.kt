@@ -7,16 +7,16 @@ import retrofit2.converter.gson.GsonConverterFactory
 
 class PackageApi {
     companion object {
-        private const val baseUrl = "BASEURL"
+        private const val baseUrl = "http://localhost:4000/api/v1"
 
         fun createApi(): PackageApiService {
-            val okHttpCLient = OkHttpClient.Builder()
+            val okHttpClient = OkHttpClient.Builder()
                 .addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
                 .build()
 
             val packageApi = Retrofit.Builder()
                 .baseUrl(baseUrl)
-                .client(okHttpCLient)
+                .client(okHttpClient)
                 .addConverterFactory(GsonConverterFactory.create())
                 .build()
 

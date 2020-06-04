@@ -14,7 +14,16 @@ class PackageInfoRepository {
     val packageItem: LiveData<ArrayList<PackageItem>>
         get() = _package
 
-    suspend fun getPackage() {
+    suspend fun getAllPackagesReceived(postalCode: String, homeNumber: Number) {
+        try {
+            var result = packageApi.getAllPackagesReceived(postalCode, homeNumber)
+
+            _package.value = result.packages
+        } catch (error: Throwable) {
+            throw PackageRefreshError(
+                "Unable to fetch packages", error
+            )
+        }
 
     }
 
