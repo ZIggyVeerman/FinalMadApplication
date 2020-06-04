@@ -17,4 +17,5 @@
     <string name="your_postalcode">Your PostalCode</string>
     <string name="_1234aa">1234AA</string>
     <string name="search_packages">Search Packages</string>
+    <string name="title_activity_received">ReceivedActivity</string>
 </resources>

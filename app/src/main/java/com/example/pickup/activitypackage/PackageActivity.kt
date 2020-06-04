@@ -1,7 +1,8 @@
-package com.example.pickup
+package com.example.pickup.activitypackage
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.pickup.R
 
 class PackageActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
