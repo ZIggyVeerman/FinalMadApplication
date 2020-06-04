@@ -9,11 +9,11 @@ import com.example.pickup.model.User
 @Dao
 interface UserDao {
 
-    @Insert
-    suspend fun insterUser(user: User)
-
     //TODO JUISTE QUERY MAKEN
     @Query("SELECT * FROM user_table")
     fun getAllGames(): LiveData<List<User>>
+
+    @Insert
+    suspend fun insertUser(user: User)
 
 }

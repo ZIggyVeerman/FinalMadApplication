@@ -21,7 +21,7 @@ class UserRepository(context: Context) {
     }
 
     suspend fun insertUser(user: User) {
-        userDao?.insterUser(user)
+        userDao?.insertUser(user)
     }
 
 }
