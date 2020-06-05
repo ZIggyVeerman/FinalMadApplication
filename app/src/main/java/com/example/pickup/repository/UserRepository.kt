@@ -16,12 +16,20 @@ class UserRepository(context: Context) {
         userDao = database?.userDao()
     }
 
-    fun getAllUsers(): LiveData<List<User>> {
-        return userDao?.getAllGames() ?: MutableLiveData(emptyList())
+    fun getUser(): LiveData<User>? {
+        return userDao?.getUser()
     }
 
     suspend fun insertUser(user: User) {
         userDao?.insertUser(user)
+    }
+
+    suspend fun deleteUser(user: User){
+        userDao?.deleteUser(user)
+    }
+
+    suspend fun deleteAllUsers(){
+        userDao?.deleteAllUsers()
     }
 
 }

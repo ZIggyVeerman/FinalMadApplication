@@ -18,4 +18,8 @@
     <string name="_1234aa">1234AA</string>
     <string name="search_packages">Search Packages</string>
     <string name="title_activity_received">ReceivedActivity</string>
+    <string name="please_enter_details_below">Please enter details below</string>
+    <string name="_000">000</string>
+    <string name="submit">Submit</string>
+    <string name="delete_personal_info">Delete personal Info</string>
 </resources>

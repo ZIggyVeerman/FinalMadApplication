@@ -3,8 +3,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     tools:context="com.example.pickup.activitymain.MainActivity">
     <item
-        android:id="@+id/action_settings"
-        android:orderInCategory="100"
-        android:title="@string/action_settings"
-        app:showAsAction="never" />
+        android:id="@+id/action_delete_user"
+        android:icon="@drawable/ic_delete_white_24dp"
+        android:title="@string/delete_personal_info"
+        app:showAsAction="ifRoom" />
 </menu>

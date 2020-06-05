@@ -33,7 +33,7 @@
         android:id="@+id/ivPackage"
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:layout_marginTop="132dp"
+        android:layout_marginTop="72dp"
         android:src="@drawable/ic_box"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
