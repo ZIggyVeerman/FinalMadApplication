@@ -42,8 +42,6 @@ class AdressFragment : Fragment() {
             val user = User(postalCode, homeNumber)
 
             viewModel.insertUser(user)
-
-            println("user saved")
         }
     }
 

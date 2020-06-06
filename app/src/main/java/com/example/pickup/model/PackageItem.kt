@@ -7,10 +7,10 @@ import java.util.*
 
 @Parcelize
 data class PackageItem (
-    @SerializedName("packageId") var packageId: Number,
+    @SerializedName("packageId") var packageId: Int,
     @SerializedName("packageName") var packageName: String,
     @SerializedName("ownerPostalCode") var ownerPostalCode: String,
-    @SerializedName("ownerHomeNumber") var ownerHomeNumber: Number,
+    @SerializedName("ownerHomeNumber") var ownerHomeNumber: Int,
     @SerializedName("pickUpTime") var pickUpTime: Date,
     @SerializedName("willPickUp") var willPickUp: Boolean
 ) : Parcelable

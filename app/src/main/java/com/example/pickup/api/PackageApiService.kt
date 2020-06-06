@@ -20,7 +20,7 @@ interface PackageApiService {
         @Field("pickupTime") pickUpTime: Date
         )
     @FormUrlEncoded
-    @POST("/getAllPackagesReceived")
+    @POST("/api/v1/getAllPackagesReceived")
     suspend fun getAllPackagesReceived(
         @Field("postalCode") postalCode: String,
         @Field("homeNumber") homeNumber: Number

@@ -18,7 +18,6 @@ class ReceivedPackageAdapter(
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
-        //TODO verander de null R.layout.EENITEM
         return ViewHolder(
             LayoutInflater.from(context).inflate(R.layout.received_package_item, parent, false)
         )
@@ -36,8 +35,10 @@ class ReceivedPackageAdapter(
 
         fun bind(packageItem: PackageItem) {
             itemView.tvPackageName.text = packageItem.packageName
-
-            //TODO bind dingen hier
+            itemView.tvOwnerPostalCode.text = packageItem.ownerPostalCode
+            itemView.tvOwnerHomeNumber.text = packageItem.ownerHomeNumber.toString()
+            itemView.tvPickUpTime.text = packageItem.pickUpTime.toString()
+            itemView.tvWillPickUp.text = packageItem.willPickUp.toString()
         }
     }
 

@@ -16,7 +16,7 @@ class MainActivityViewModel(application: Application) : AndroidViewModel(applica
     private val ioScope = CoroutineScope(Dispatchers.IO)
 
     val user: LiveData<User>? = userRepository.getUser()
-    
+
     fun insertUser(user: User) {
         ioScope.launch {
             userRepository.insertUser(user)

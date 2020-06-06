@@ -16,7 +16,7 @@ class PackageInfoRepository {
 
     suspend fun getAllPackagesReceived(postalCode: String, homeNumber: Number) {
         try {
-            var result = packageApi.getAllPackagesReceived(postalCode, homeNumber)
+            val result = packageApi.getAllPackagesReceived(postalCode, homeNumber)
 
             _package.value = result.packages
         } catch (error: Throwable) {

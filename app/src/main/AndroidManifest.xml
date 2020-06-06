@@ -10,17 +10,17 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity
+            android:name=".activityreceived.AddActivity"
+            android:label="@string/title_activity_add"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activityreceived.ReceivedActivity"
             android:label="@string/title_activity_received"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".activitypackage.PackageActivity" />
-        <activity android:name=".CollectPackage" />
-        <activity
-            android:name=".ReceivedPackage"
-            android:label="@string/title_activity_received_package"
-            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activitymain.MainActivity"
             android:label="@string/app_name"
