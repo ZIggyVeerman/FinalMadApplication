@@ -20,7 +20,10 @@
             android:name=".activityreceived.ReceivedActivity"
             android:label="@string/title_activity_received"
             android:theme="@style/AppTheme.NoActionBar" />
-        <activity android:name=".activitypackage.PackageActivity" />
+        <activity
+            android:name=".activitypackage.PackageActivity"
+            android:label="Your Packages"
+            android:theme="@style/AppTheme.NoActionBar" />
         <activity
             android:name=".activitymain.MainActivity"
             android:label="@string/app_name"

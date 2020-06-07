@@ -11,6 +11,7 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.pickup.R
+import com.example.pickup.activitypackage.PackageActivity
 import com.example.pickup.activityreceived.ReceivedActivity
 import com.example.pickup.model.User
 import com.example.pickup.viewmodels.MainActivityViewModel
@@ -54,10 +55,10 @@ class HomeFragment : Fragment() {
                 findNavController().navigate(R.id.action_homeFragment_to_AdressFragment)
             }
         } else {
+            //TODO: GEEF USER OBJECT MEE
             view.findViewById<ImageView>(R.id.ivPackage).setOnClickListener {
-                var data: Bundle? = null
-                data?.putParcelable("user", User("8244DX", 36))
-                println("TODO: GO TO PACKAGE OWNER SCREEN")
+                val intent = Intent(activity, PackageActivity::class.java)
+                activity?.startActivity(intent)
             }
 
             view.findViewById<ImageView>(R.id.ivStorage).setOnClickListener {

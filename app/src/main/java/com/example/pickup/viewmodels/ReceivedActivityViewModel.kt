@@ -17,7 +17,7 @@ class ReceivedActivityViewModel : ViewModel() {
     val errorText: LiveData<String>
         get() = _errorText
 
-    fun getPackages(postalCode: String, homeNumber: Number) {
+    fun getPackages(postalCode: String, homeNumber: Int) {
         viewModelScope.launch {
             try {
                 packageInfoRepository.getAllPackagesReceived(postalCode, homeNumber)
