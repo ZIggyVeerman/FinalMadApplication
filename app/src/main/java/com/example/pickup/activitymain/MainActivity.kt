@@ -30,8 +30,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun deleteUserData() {
         mainActivityViewModel.deleteAllUsers()
-
-        //TODO delete all userdata
     }
 
     private fun initNavigation() {

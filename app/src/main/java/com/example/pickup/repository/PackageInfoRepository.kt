@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 import com.example.pickup.api.PackageApi
 import com.example.pickup.api.PackageApiService
 import com.example.pickup.model.PackageItem
-import com.example.pickup.model.UserWithPackageItem
+import com.example.pickup.model.PackageOverviewResponse
 import java.util.*
 import kotlin.collections.ArrayList
 
@@ -14,13 +14,14 @@ class PackageInfoRepository {
 
     private val _package: MutableLiveData<ArrayList<PackageItem>> = MutableLiveData()
 
-    private val _ownerPackage: MutableLiveData<ArrayList<UserWithPackageItem>> = MutableLiveData()
-
-    val ownerPackageItem: LiveData<ArrayList<UserWithPackageItem>>
-        get() = _ownerPackage
-
     val packageItem: LiveData<ArrayList<PackageItem>>
         get() = _package
+
+    private val _ownerPackage: MutableLiveData<ArrayList<PackageOverviewResponse>> =
+        MutableLiveData()
+
+    val ownerPackageItem: LiveData<ArrayList<PackageOverviewResponse>>
+        get() = _ownerPackage
 
     suspend fun addNewUser(postalCode: String, homeNumber: Int) {
         try {
@@ -71,9 +72,10 @@ class PackageInfoRepository {
 
     suspend fun getPackageForOwner(ownerPostalCode: String, ownerHomeNumber: Int) {
         try {
-            val result: Unit = packageApi.getPackageForOwner(ownerPostalCode, ownerHomeNumber)
+            val result = packageApi.getPackageForOwner(ownerPostalCode, ownerHomeNumber)
 
-            _ownerPackage.value = null
+            _ownerPackage.value = result
+
         } catch (error: Throwable) {
             throw PackageRefreshError(
                 "Unable to fetch packages", error

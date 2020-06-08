@@ -2,13 +2,13 @@ package com.example.pickup.activityreceived
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.os.Handler
 import android.view.MenuItem
 import android.widget.Toast
 import androidx.activity.viewModels
-import androidx.lifecycle.ViewModelProvider
 import com.example.pickup.R
-import com.example.pickup.viewmodels.OwnerActivityViewModel
+import com.example.pickup.model.User
+import com.example.pickup.viewmodels.MainActivityViewModel
+import com.example.pickup.viewmodels.ReceivedActivityViewModel
 import kotlinx.android.synthetic.main.activity_add.*
 import kotlinx.android.synthetic.main.content_add.*
 import java.lang.Error
@@ -17,14 +17,16 @@ import java.util.*
 import kotlin.properties.Delegates
 
 class AddActivity : AppCompatActivity() {
+    private lateinit var user: User
     private lateinit var packName: String
     private lateinit var owPostalCode: String
     private var owHomeNumber by Delegates.notNull<Int>()
     private lateinit var pickUpTime: Date
     private val format = SimpleDateFormat("dd MM HH mm", Locale.GERMAN)
 
-    private lateinit var viewModel: OwnerActivityViewModel
-
+    // view models
+    private val viewModelMain: MainActivityViewModel by viewModels()
+    private lateinit var viewModel: ReceivedActivityViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -33,16 +35,27 @@ class AddActivity : AppCompatActivity() {
 
         supportActionBar?.setDisplayHomeAsUpEnabled(true)
 
-        viewModel = ViewModelProvider(this).get(OwnerActivityViewModel::class.java)
+        observeViewModel()
+        fab.setOnClickListener { savePackage() }
+    }
 
-        fab.setOnClickListener{savePackage()}
+    private fun observeViewModel() {
+        viewModelMain.user?.observe(this, androidx.lifecycle.Observer { user ->
+            this@AddActivity.user = user
+        })
     }
 
     private fun savePackage() {
         if (checkFields()) {
-            //TODO remove  hardcoded string with good stuff
-            viewModel.addNewPackage("8244DX", 36, packName, owPostalCode, owHomeNumber, pickUpTime)
-
+            println(this.user.homeNumber)
+            viewModel.addNewPackage(
+                this.user.postalCode,
+                this.user.homeNumber,
+                packName,
+                owPostalCode,
+                owHomeNumber,
+                pickUpTime
+            )
             finish()
         }
     }

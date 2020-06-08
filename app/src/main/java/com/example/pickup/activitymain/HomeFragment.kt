@@ -47,7 +47,7 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun checkIfUser(intent: Intent, where: Int) {
+    private fun checkIfUser(intent: Intent) {
         if (this.user == null) {
             INTENT = intent
             findNavController().navigate(R.id.action_homeFragment_to_AdressFragment)
@@ -61,12 +61,12 @@ class HomeFragment : Fragment() {
 
         view.findViewById<ImageView>(R.id.ivPackage).setOnClickListener {
             val intent = Intent(activity, PackageActivity::class.java)
-            checkIfUser(intent, 1)
+            checkIfUser(intent)
         }
 
         view.findViewById<ImageView>(R.id.ivStorage).setOnClickListener {
             val intent = Intent(activity, ReceivedActivity::class.java)
-            checkIfUser(intent, 2)
+            checkIfUser(intent)
         }
     }
 

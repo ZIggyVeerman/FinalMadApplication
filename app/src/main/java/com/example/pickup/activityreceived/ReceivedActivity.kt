@@ -22,7 +22,6 @@ import kotlinx.android.synthetic.main.content_received.*
 const val ADD_NEW_PACKAGE_CODE = 100
 
 class ReceivedActivity : AppCompatActivity() {
-
     private val packages = arrayListOf<PackageItem>()
     private val receivedPackageAdapter = ReceivedPackageAdapter(packages) { packageItem ->
         onPackageClick(packageItem)

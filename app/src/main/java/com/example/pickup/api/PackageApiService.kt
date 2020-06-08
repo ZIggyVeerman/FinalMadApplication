@@ -1,14 +1,13 @@
 package com.example.pickup.api
 
+import com.example.pickup.model.PackageOverviewResponse
 import com.example.pickup.model.ResultSetWithPackages
-import com.example.pickup.model.User
-import retrofit2.Callback
-import retrofit2.Response
 import retrofit2.http.DELETE
 import retrofit2.http.Field
 import retrofit2.http.FormUrlEncoded
 import retrofit2.http.POST
 import java.util.*
+import kotlin.collections.ArrayList
 
 interface PackageApiService {
     @FormUrlEncoded
@@ -41,7 +40,7 @@ interface PackageApiService {
     suspend fun getPackageForOwner(
         @Field("ownerPostalCode") ownerPostalCode: String,
         @Field("ownerHomeNumber") ownerHomeNumber: Int
-    )
+    ): ArrayList<PackageOverviewResponse>
 
     @FormUrlEncoded
     @POST("/api/v1/updatePickupYes")

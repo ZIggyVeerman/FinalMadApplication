@@ -24,6 +24,13 @@
             android:textSize="24sp"
             android:textStyle="bold" />
 
+        <TextView
+            android:id="@+id/tfWelcome2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/we_need_this_to_set_up_your_account"
+            android:textSize="16sp" />
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="409dp"
             android:layout_height="wrap_content">

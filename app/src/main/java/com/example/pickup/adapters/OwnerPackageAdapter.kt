@@ -6,11 +6,12 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pickup.R
-import com.example.pickup.model.UserWithPackageItem
+import com.example.pickup.model.PackageItem
+import com.example.pickup.model.PackageOverviewResponse
 import kotlinx.android.synthetic.main.owner_package_item.view.*
 
 class OwnerPackageAdapter(
-    private val packages: ArrayList<UserWithPackageItem>
+    private val overview: ArrayList<PackageOverviewResponse>
 ) : RecyclerView.Adapter<OwnerPackageAdapter.ViewHolder>() {
 
     private lateinit var context: Context
@@ -25,15 +26,21 @@ class OwnerPackageAdapter(
         )
     }
 
-    override fun getItemCount(): Int = packages.size
+    override fun getItemCount(): Int = overview.size
 
     override fun onBindViewHolder(holder: ViewHolder, position: Int) =
-        holder.bind(packages[position])
+        holder.bind(overview[position])
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(packageItem: UserWithPackageItem) {
-            itemView.tvPackageName.text = packageItem.postalCode
+        fun bind(packageItem: PackageOverviewResponse) {
+            itemView.tvPickupPostal.text = packageItem.postalCode
+            itemView.tvPickupHomeNumber.text = packageItem.homeNumber.toString()
+            packageItem.packages.forEach { element ->
+                itemView.tvPackageName.text = element.packageName
+                itemView.tvPickUpTime.text = element.pickUpTime.toString()
+                itemView.tvWillPickUp.text = element.willPickUp.toString()
+            }
 
             //TODO BIND DINGEN
 

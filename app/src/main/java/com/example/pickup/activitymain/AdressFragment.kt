@@ -12,11 +12,13 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.pickup.R
 import com.example.pickup.model.User
 import com.example.pickup.viewmodels.MainActivityViewModel
+import com.example.pickup.viewmodels.OwnerActivityViewModel
 import kotlinx.android.synthetic.main.fragment_adress.*
 import kotlin.properties.Delegates
 
 class AdressFragment : Fragment() {
     private lateinit var viewModel: MainActivityViewModel
+    private lateinit var ownerActivityViewModel: OwnerActivityViewModel
     private lateinit var postalCode: String
     private var homeNumber by Delegates.notNull<Int>()
 
@@ -28,20 +30,21 @@ class AdressFragment : Fragment() {
         viewModel = ViewModelProvider(activity as AppCompatActivity)
             .get(MainActivityViewModel::class.java)
 
+        ownerActivityViewModel = ViewModelProvider(activity as AppCompatActivity)
+            .get(OwnerActivityViewModel::class.java)
+
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_adress, container, false)
     }
 
     private fun saveGame() {
-
         if (checkFields()) {
             val user = User(postalCode, homeNumber)
 
             viewModel.insertUser(user)
+            ownerActivityViewModel.addNewUser(postalCode, homeNumber)
 
             activity?.startActivity(HomeFragment.INTENT)
-
-            // TODO stuur new user ook naar database toe
         }
     }
 
