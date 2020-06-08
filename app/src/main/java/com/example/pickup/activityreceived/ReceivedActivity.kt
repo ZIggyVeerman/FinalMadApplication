@@ -9,6 +9,8 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pickup.R
+import com.example.pickup.activitymain.HomeFragment
+import com.example.pickup.activitymain.MainActivity
 import com.example.pickup.adapters.ReceivedPackageAdapter
 import com.example.pickup.model.PackageItem
 import com.example.pickup.model.User
@@ -76,6 +78,8 @@ class ReceivedActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == android.R.id.home) {
+            val intent = Intent(this, MainActivity::class.java)
+            startActivity(intent)
             finish()
             return true
         }
