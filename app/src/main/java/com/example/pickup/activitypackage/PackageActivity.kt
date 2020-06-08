@@ -8,6 +8,7 @@ import androidx.activity.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.pickup.R
 import com.example.pickup.activitymain.MainActivity
 import com.example.pickup.adapters.OwnerPackageAdapter
@@ -17,6 +18,7 @@ import com.example.pickup.viewmodels.MainActivityViewModel
 import com.example.pickup.viewmodels.OwnerActivityViewModel
 import kotlinx.android.synthetic.main.activity_add.*
 import kotlinx.android.synthetic.main.content_package.*
+import kotlinx.android.synthetic.main.owner_package_item.*
 
 class PackageActivity : AppCompatActivity() {
     private val overview = arrayListOf<PackageOverviewResponse>()
@@ -41,6 +43,9 @@ class PackageActivity : AppCompatActivity() {
         rvOwnerPackages.adapter = ownerPackageAdapter
         viewModel.getPackageForOwner(this.user.postalCode, this.user.homeNumber)
 
+//        btYes.setOnClickListener { handleYes() }
+//        btNo.setOnClickListener { handleNo() }
+
     }
 
     private fun observeViewModel() {
@@ -54,6 +59,14 @@ class PackageActivity : AppCompatActivity() {
             this@PackageActivity.user = user
             initViews()
         })
+    }
+
+    private fun handleYes() {
+        //TODO handle yes
+    }
+
+    private fun handleNo() {
+        //TODO handle NO
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {

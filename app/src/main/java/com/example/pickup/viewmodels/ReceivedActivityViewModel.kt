@@ -68,4 +68,21 @@ class ReceivedActivityViewModel : ViewModel() {
             }
         }
     }
+
+    fun agreeNewDate(
+        ownerPostalCode: String,
+        ownerHomeNumber: Int,
+        receivedPostalCode: String,
+        receivedHomeNumber: Int
+    ) {
+        viewModelScope.launch {
+            try {
+                packageInfoRepository.agreeNewDate(
+                    ownerPostalCode, ownerHomeNumber, receivedPostalCode, receivedHomeNumber
+                )
+            } catch (error: PackageInfoRepository.PickupUpdateError) {
+                _errorText.value = error.message
+            }
+        }
+    }
 }

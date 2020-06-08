@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.pickup.repository.PackageInfoRepository
 import kotlinx.coroutines.launch
+import java.util.*
 
 class OwnerActivityViewModel : ViewModel() {
     private val packageInfoRepository = PackageInfoRepository()
@@ -33,6 +34,45 @@ class OwnerActivityViewModel : ViewModel() {
             try {
                 packageInfoRepository.getPackageForOwner(postalCode, homeNumber)
             } catch (error: PackageInfoRepository.PackageRefreshError) {
+                _errorText.value = error.message
+            }
+        }
+    }
+
+    fun handleYes(
+        ownerPostalCode: String,
+        ownerHomeNumber: Int,
+        receivedPostalCode: String,
+        receivedHomeNumber: Int
+    ) {
+        viewModelScope.launch {
+            try {
+                packageInfoRepository.updatePickupYes(
+                    ownerPostalCode, ownerHomeNumber, receivedPostalCode, receivedHomeNumber
+                )
+            } catch (error: PackageInfoRepository.PickupUpdateError) {
+                _errorText.value = error.message
+            }
+        }
+    }
+
+    fun handleNo(
+        ownerPostalCode: String,
+        ownerHomeNumber: Int,
+        receivedPostalCode: String,
+        receivedHomeNumber: Int,
+        newDateTime: Date
+    ) {
+        viewModelScope.launch {
+            try {
+                packageInfoRepository.updatePickupNo(
+                    ownerPostalCode,
+                    ownerHomeNumber,
+                    receivedPostalCode,
+                    receivedHomeNumber,
+                    newDateTime
+                )
+            } catch (error: PackageInfoRepository.PickupUpdateError) {
                 _errorText.value = error.message
             }
         }

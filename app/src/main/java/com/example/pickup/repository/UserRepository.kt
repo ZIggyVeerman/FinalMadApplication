@@ -24,11 +24,11 @@ class UserRepository(context: Context) {
         userDao?.insertUser(user)
     }
 
-    suspend fun deleteUser(user: User){
+    suspend fun deleteUser(user: User) {
         userDao?.deleteUser(user)
     }
 
-    suspend fun deleteAllUsers(){
+    suspend fun deleteAllUsers() {
         userDao?.deleteAllUsers()
     }
 

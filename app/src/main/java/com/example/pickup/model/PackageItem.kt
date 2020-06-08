@@ -6,7 +6,7 @@ import kotlinx.android.parcel.Parcelize
 import java.util.*
 
 @Parcelize
-data class PackageItem (
+data class PackageItem(
     @SerializedName("packageId") var packageId: Int,
     @SerializedName("packageName") var packageName: String,
     @SerializedName("ownerPostalCode") var ownerPostalCode: String,

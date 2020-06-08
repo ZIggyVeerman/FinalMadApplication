@@ -119,7 +119,7 @@ class AddActivity : AppCompatActivity() {
         Toast.makeText(this, toast, Toast.LENGTH_SHORT).show()
     }
 
-    private fun startReceivedActivity(){
+    private fun startReceivedActivity() {
         val intent = Intent(this, ReceivedActivity::class.java)
         startActivityForResult(intent, OK)
     }

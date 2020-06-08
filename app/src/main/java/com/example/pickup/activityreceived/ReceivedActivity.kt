@@ -70,7 +70,7 @@ class ReceivedActivity : AppCompatActivity() {
     }
 
     private fun onPackageClick(packageItem: PackageItem) {
-
+        // accept new date when incomming
     }
 
     private fun startAddActivity() {
@@ -112,13 +112,7 @@ class ReceivedActivity : AppCompatActivity() {
                 viewModelReceived.deletePackageFromList(user, packageToDelete)
                 observeViewModel()
 
-//                Snackbar.make(
-//                    viewHolder.itemView,
-//                    (DELETEGAME + gameToDelete.title),
-//                    Snackbar.LENGTH_LONG
-//                )
-//                    .setAction("UNDO") { mainActivityViewModel.insertGame(gameToDelete) }
-//                    .show()
+                //TODO melding met dat het verwijderd is
             }
         }
         return ItemTouchHelper(callback)
