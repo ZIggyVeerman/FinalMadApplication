@@ -1,9 +1,7 @@
 package com.example.pickup.viewmodels
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.Observer
+import androidx.lifecycle.*
 import com.example.pickup.model.User
 import com.example.pickup.repository.UserRepository
 import kotlinx.coroutines.CoroutineScope

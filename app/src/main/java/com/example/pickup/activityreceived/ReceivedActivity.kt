@@ -3,19 +3,19 @@ package com.example.pickup.activityreceived
 import android.content.Intent
 import android.os.Bundle
 import android.view.MenuItem
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pickup.R
 import com.example.pickup.adapters.ReceivedPackageAdapter
 import com.example.pickup.model.PackageItem
+import com.example.pickup.model.User
+import com.example.pickup.viewmodels.MainActivityViewModel
 import com.example.pickup.viewmodels.ReceivedActivityViewModel
-import com.google.android.material.floatingactionbutton.FloatingActionButton
 import kotlinx.android.synthetic.main.activity_received.*
 import kotlinx.android.synthetic.main.content_received.*
-import java.lang.Exception
 
 const val ADD_NEW_PACKAGE_CODE = 100
 
@@ -25,7 +25,9 @@ class ReceivedActivity : AppCompatActivity() {
     private val receivedPackageAdapter = ReceivedPackageAdapter(packages) { packageItem ->
         onPackageClick(packageItem)
     }
-    private lateinit var viewModel: ReceivedActivityViewModel
+    private lateinit var viewModelReceived: ReceivedActivityViewModel
+    private val viewModelMain: MainActivityViewModel by viewModels()
+    private lateinit var user: User
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -35,39 +37,39 @@ class ReceivedActivity : AppCompatActivity() {
         supportActionBar?.setHomeButtonEnabled(true)
 
         observeViewModel()
-        initViews()
-    }
-
-    override fun onResume() {
-        super.onResume()
-        observeViewModel()
     }
 
     private fun initViews() {
         rvReceivedPackages.layoutManager = LinearLayoutManager(this)
         rvReceivedPackages.adapter = receivedPackageAdapter
-        viewModel.getPackages("8244DX", 36)
 
-        fab.setOnClickListener{
+        viewModelReceived.getPackages(this.user.postalCode, this.user.homeNumber)
+
+        fab.setOnClickListener {
             startAddActivity()
         }
 
     }
 
     private fun observeViewModel() {
-        viewModel = ViewModelProvider(this).get(ReceivedActivityViewModel::class.java)
-        viewModel.packages.observe(this, Observer { packageItem ->
+        viewModelReceived = ViewModelProvider(this).get(ReceivedActivityViewModel::class.java)
+        viewModelReceived.packages.observe(this, Observer { packageItem ->
             packages.clear()
             packages.addAll(packageItem)
             receivedPackageAdapter.notifyDataSetChanged()
         })
+        viewModelMain.user?.observe(this, Observer { user ->
+            this@ReceivedActivity.user = user
+            initViews()
+        })
+
     }
 
     private fun onPackageClick(packageItem: PackageItem) {
 
     }
 
-    private fun startAddActivity(){
+    private fun startAddActivity() {
         val intent = Intent(this, AddActivity::class.java)
         startActivityForResult(intent, ADD_NEW_PACKAGE_CODE)
     }

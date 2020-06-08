@@ -15,8 +15,6 @@ import com.example.pickup.viewmodels.MainActivityViewModel
 import kotlinx.android.synthetic.main.fragment_adress.*
 import kotlin.properties.Delegates
 
-const val NEW_GAME = "NEW_GAME"
-
 class AdressFragment : Fragment() {
     private lateinit var viewModel: MainActivityViewModel
     private lateinit var postalCode: String
@@ -40,6 +38,10 @@ class AdressFragment : Fragment() {
             val user = User(postalCode, homeNumber)
 
             viewModel.insertUser(user)
+
+            activity?.startActivity(HomeFragment.INTENT)
+
+            // TODO stuur new user ook naar database toe
         }
     }
 
@@ -49,12 +51,12 @@ class AdressFragment : Fragment() {
             return false
         }
 
-        this.postalCode = tifPostalCode.text.toString()
-
         if (tifHomeNumber.text.isNullOrBlank()) {
             customToast(HOMENUMBER)
             return false
         }
+
+        this.postalCode = tifPostalCode.text.toString()
         this.homeNumber = tifHomeNumber.text.toString().toInt()
 
         return true
@@ -65,9 +67,6 @@ class AdressFragment : Fragment() {
 
         view.findViewById<Button>(R.id.btSubmit).setOnClickListener {
             saveGame()
-
-//            val intent = Intent(activity, PackageActivity::class.java)
-//            activity?.startActivity(intent)
         }
     }
 
@@ -78,6 +77,5 @@ class AdressFragment : Fragment() {
     companion object {
         const val POSTALCODE = "Geef een postecode"
         const val HOMENUMBER = "Geef een huisnummer"
-        const val ERROR = "Error zie fout: "
     }
 }

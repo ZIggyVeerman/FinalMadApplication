@@ -8,6 +8,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.os.bundleOf
+import androidx.fragment.app.FragmentFactory
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
@@ -20,8 +23,6 @@ import com.example.pickup.viewmodels.MainActivityViewModel
 /**
  * A simple [Fragment] subclass as the default destination in the navigation.
  */
-const val USER_EXTRA = "EXTRA"
-
 class HomeFragment : Fragment() {
     private lateinit var viewModel: MainActivityViewModel
     private var user: User? = null
@@ -46,8 +47,9 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun checkIfUser(intent: Intent) {
+    private fun checkIfUser(intent: Intent, where: Int) {
         if (this.user == null) {
+            INTENT = intent
             findNavController().navigate(R.id.action_homeFragment_to_AdressFragment)
         } else {
             activity?.startActivity(intent)
@@ -59,12 +61,16 @@ class HomeFragment : Fragment() {
 
         view.findViewById<ImageView>(R.id.ivPackage).setOnClickListener {
             val intent = Intent(activity, PackageActivity::class.java)
-            checkIfUser(intent)
+            checkIfUser(intent, 1)
         }
 
         view.findViewById<ImageView>(R.id.ivStorage).setOnClickListener {
             val intent = Intent(activity, ReceivedActivity::class.java)
-            checkIfUser(intent)
+            checkIfUser(intent, 2)
         }
+    }
+
+    companion object {
+        var INTENT: Intent? = null
     }
 }
