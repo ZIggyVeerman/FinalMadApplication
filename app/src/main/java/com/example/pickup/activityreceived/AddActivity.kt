@@ -1,5 +1,6 @@
 package com.example.pickup.activityreceived
 
+import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
@@ -26,7 +27,7 @@ class AddActivity : AppCompatActivity() {
 
     // view models
     private val viewModelMain: MainActivityViewModel by viewModels()
-    private lateinit var viewModel: ReceivedActivityViewModel
+    private val viewModel: ReceivedActivityViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -56,6 +57,7 @@ class AddActivity : AppCompatActivity() {
                 owHomeNumber,
                 pickUpTime
             )
+            startReceivedActivity()
             finish()
         }
     }
@@ -117,8 +119,14 @@ class AddActivity : AppCompatActivity() {
         Toast.makeText(this, toast, Toast.LENGTH_SHORT).show()
     }
 
+    private fun startReceivedActivity(){
+        val intent = Intent(this, ReceivedActivity::class.java)
+        startActivityForResult(intent, OK)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         return try {
+            startReceivedActivity()
             finish()
             true
         } catch (e: Exception) {
@@ -136,5 +144,6 @@ class AddActivity : AppCompatActivity() {
         const val HOUR = "Geef een uur op"
         const val MINUTE = "Geef een minuut op"
         const val ERROR = "Error zie fout: "
+        const val OK = 100
     }
 }

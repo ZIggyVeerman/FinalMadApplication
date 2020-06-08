@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.pickup.model.PackageItem
+import com.example.pickup.model.User
 import com.example.pickup.repository.PackageInfoRepository
 import kotlinx.coroutines.launch
 import java.util.*
@@ -47,6 +49,21 @@ class ReceivedActivityViewModel : ViewModel() {
                     pickUpTime
                 )
             } catch (error: PackageInfoRepository.PackageCreateError) {
+                _errorText.value = error.message
+            }
+        }
+    }
+
+    fun deletePackageFromList(user: User, packageToDelete: PackageItem) {
+        println(packageToDelete)
+        viewModelScope.launch {
+            try {
+                packageInfoRepository.packageReceived(
+                    user.postalCode,
+                    user.homeNumber,
+                    packageToDelete.packageId
+                )
+            } catch (error: PackageInfoRepository.PackageDeleteError) {
                 _errorText.value = error.message
             }
         }

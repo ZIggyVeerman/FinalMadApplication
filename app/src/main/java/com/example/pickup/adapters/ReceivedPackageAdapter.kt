@@ -35,10 +35,17 @@ class ReceivedPackageAdapter(
 
         fun bind(packageItem: PackageItem) {
             itemView.tvPackageName.text = packageItem.packageName
-            itemView.tvOwnerPostalCode.text = packageItem.ownerPostalCode
-            itemView.tvOwnerHomeNumber.text = packageItem.ownerHomeNumber.toString()
-            itemView.tvPickUpTime.text = packageItem.pickUpTime.toString()
-            itemView.tvWillPickUp.text = packageItem.willPickUp.toString()
+            itemView.tvOwnerPostalCode.text =
+                itemView.context.getString(R.string.PostalCodeReceived, packageItem.ownerPostalCode)
+            itemView.tvOwnerHomeNumber.text = itemView.context.getString(
+                R.string.HomeNumberReceived,
+                packageItem.ownerHomeNumber.toString()
+            )
+            itemView.tvPickUpTime.text = itemView.context.getString(
+                R.string.PickupReceivedTime,
+                packageItem.pickUpTime.toString()
+            )
+            itemView.tfCanMakePickup.text = packageItem.willPickUp.toString()
         }
     }
 

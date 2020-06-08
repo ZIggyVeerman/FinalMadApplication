@@ -7,9 +7,10 @@ import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.pickup.R
-import com.example.pickup.activitymain.HomeFragment
 import com.example.pickup.activitymain.MainActivity
 import com.example.pickup.adapters.ReceivedPackageAdapter
 import com.example.pickup.model.PackageItem
@@ -43,11 +44,13 @@ class ReceivedActivity : AppCompatActivity() {
     private fun initViews() {
         rvReceivedPackages.layoutManager = LinearLayoutManager(this)
         rvReceivedPackages.adapter = receivedPackageAdapter
+        createItemTouchHelper().attachToRecyclerView(rvReceivedPackages)
 
         viewModelReceived.getPackages(this.user.postalCode, this.user.homeNumber)
 
         fab.setOnClickListener {
             startAddActivity()
+            finish()
         }
 
     }
@@ -84,6 +87,41 @@ class ReceivedActivity : AppCompatActivity() {
         }
         return super.onOptionsItemSelected(item)
 
+    }
+
+    private fun createItemTouchHelper(): ItemTouchHelper {
+
+        // Callback which is used to create the ItemTouch helper. Only enables left swipe.
+        // Use ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT) to also enable right swipe.
+        val callback = object : ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.LEFT) {
+
+            // Enables or Disables the ability to move items up and down.
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
+
+            // Callback triggered when a user swiped an item.
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val position = viewHolder.adapterPosition
+                val packageToDelete = packages[position]
+
+                viewModelReceived.deletePackageFromList(user, packageToDelete)
+                observeViewModel()
+
+//                Snackbar.make(
+//                    viewHolder.itemView,
+//                    (DELETEGAME + gameToDelete.title),
+//                    Snackbar.LENGTH_LONG
+//                )
+//                    .setAction("UNDO") { mainActivityViewModel.insertGame(gameToDelete) }
+//                    .show()
+            }
+        }
+        return ItemTouchHelper(callback)
     }
 
 }

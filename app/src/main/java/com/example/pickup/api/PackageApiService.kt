@@ -71,7 +71,7 @@ interface PackageApiService {
     )
 
     @FormUrlEncoded
-    @DELETE("/packageReceived")
+    @POST("/api/v1/packageReceived")
     suspend fun packageReceived(
         @Field("postalCode") postalCode: String,
         @Field("homeNumber") homeNumber: Int,

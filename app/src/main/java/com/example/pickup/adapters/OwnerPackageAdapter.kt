@@ -39,11 +39,7 @@ class OwnerPackageAdapter(
             packageItem.packages.forEach { element ->
                 itemView.tvPackageName.text = element.packageName
                 itemView.tvPickUpTime.text = element.pickUpTime.toString()
-                itemView.tvWillPickUp.text = element.willPickUp.toString()
             }
-
-            //TODO BIND DINGEN
-
         }
     }
 
