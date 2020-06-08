@@ -57,8 +57,8 @@ class AddActivity : AppCompatActivity() {
                 owHomeNumber,
                 pickUpTime
             )
-            startReceivedActivity()
             finish()
+            startReceivedActivity()
         }
     }
 
