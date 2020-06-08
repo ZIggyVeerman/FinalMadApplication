@@ -8,6 +8,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.pickup.R
@@ -23,48 +24,47 @@ const val USER_EXTRA = "EXTRA"
 
 class HomeFragment : Fragment() {
     private lateinit var viewModel: MainActivityViewModel
-    private lateinit var user: User
+    private var user: User? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Initialize the Shared Activity ViewModel
-        viewModel = ViewModelProvider(activity as AppCompatActivity)
-            .get(MainActivityViewModel::class.java)
+        // inflate the viewModel
+        observeViewModel()
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
     }
 
-    private fun checkIfUser(): Boolean {
-        if (viewModel.user != null) {
-            return true
+    private fun observeViewModel() {
+        viewModel = ViewModelProvider(activity as AppCompatActivity)
+            .get(MainActivityViewModel::class.java)
+        viewModel.user?.observe(viewLifecycleOwner, Observer { user ->
+            this.user = user
+        })
+
+    }
+
+    private fun checkIfUser(intent: Intent) {
+        if (this.user == null) {
+            findNavController().navigate(R.id.action_homeFragment_to_AdressFragment)
+        } else {
+            activity?.startActivity(intent)
         }
-        return false
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        if (false) {
-            view.findViewById<ImageView>(R.id.ivPackage).setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_AdressFragment)
-            }
-            view.findViewById<ImageView>(R.id.ivStorage).setOnClickListener {
-                findNavController().navigate(R.id.action_homeFragment_to_AdressFragment)
-            }
-        } else {
-            //TODO: GEEF USER OBJECT MEE
-            view.findViewById<ImageView>(R.id.ivPackage).setOnClickListener {
-                val intent = Intent(activity, PackageActivity::class.java)
-                activity?.startActivity(intent)
-            }
+        view.findViewById<ImageView>(R.id.ivPackage).setOnClickListener {
+            val intent = Intent(activity, PackageActivity::class.java)
+            checkIfUser(intent)
+        }
 
-            view.findViewById<ImageView>(R.id.ivStorage).setOnClickListener {
-                val intent = Intent(activity, ReceivedActivity::class.java)
-                activity?.startActivity(intent)
-            }
+        view.findViewById<ImageView>(R.id.ivStorage).setOnClickListener {
+            val intent = Intent(activity, ReceivedActivity::class.java)
+            checkIfUser(intent)
         }
     }
 }

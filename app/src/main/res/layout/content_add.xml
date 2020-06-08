@@ -26,12 +26,12 @@
             android:padding="16dp">
 
             <com.google.android.material.textfield.TextInputLayout
-                android:id="@+id/tifPackageName"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:background="@android:color/white">
 
                 <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/tifPackageName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="#FFFFFF"

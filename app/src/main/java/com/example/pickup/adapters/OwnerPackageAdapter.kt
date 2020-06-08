@@ -6,10 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pickup.R
-import com.example.pickup.model.PackageItem
+import com.example.pickup.model.UserWithPackageItem
+import kotlinx.android.synthetic.main.owner_package_item.view.*
 
 class OwnerPackageAdapter(
-    private val packages: List<PackageItem>
+    private val packages: ArrayList<UserWithPackageItem>
 ) : RecyclerView.Adapter<OwnerPackageAdapter.ViewHolder>() {
 
     private lateinit var context: Context
@@ -31,7 +32,9 @@ class OwnerPackageAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
-        fun bind(packageItem: PackageItem) {
+        fun bind(packageItem: UserWithPackageItem) {
+            itemView.tvPackageName.text = packageItem.postalCode
+
             //TODO BIND DINGEN
 
         }

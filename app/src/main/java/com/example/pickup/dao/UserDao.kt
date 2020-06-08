@@ -11,7 +11,7 @@ import com.example.pickup.model.User
 interface UserDao {
 
     //TODO JUISTE QUERY MAKEN
-    @Query("SELECT * FROM user_table ORDER BY id LIMIT 1")
+    @Query("SELECT * FROM user_table")
     fun getUser(): LiveData<User>
 
     @Insert

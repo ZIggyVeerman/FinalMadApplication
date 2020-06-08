@@ -41,8 +41,7 @@ interface PackageApiService {
     suspend fun getPackageForOwner(
         @Field("ownerPostalCode") ownerPostalCode: String,
         @Field("ownerHomeNumber") ownerHomeNumber: Int
-
-    ): ResultSetWithPackages
+    )
 
     @FormUrlEncoded
     @POST("/api/v1/updatePickupYes")

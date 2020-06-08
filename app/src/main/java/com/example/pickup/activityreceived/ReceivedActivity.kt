@@ -6,6 +6,7 @@ import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.observe
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pickup.R
 import com.example.pickup.adapters.ReceivedPackageAdapter
@@ -35,6 +36,11 @@ class ReceivedActivity : AppCompatActivity() {
 
         observeViewModel()
         initViews()
+    }
+
+    override fun onResume() {
+        super.onResume()
+        observeViewModel()
     }
 
     private fun initViews() {
