@@ -13,6 +13,12 @@
         <action
             android:id="@+id/action_homeFragment_to_AdressFragment"
             app:destination="@id/AdressFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_ReceivedFragment"
+            app:destination="@id/ReceivedFragment" />
+        <action
+            android:id="@+id/action_HomeFragment_to_packageFragment"
+            app:destination="@id/packageFragment" />
     </fragment>
     <fragment
         android:id="@+id/AdressFragment"
@@ -23,5 +29,44 @@
         <action
             android:id="@+id/action_AdressFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
+        <action
+            android:id="@+id/action_AdressFragment_to_ReceivedFragment"
+            app:destination="@id/ReceivedFragment" />
+        <action
+            android:id="@+id/action_AdressFragment_to_packageFragment"
+            app:destination="@id/packageFragment" />
+        <argument
+            android:name="myArg"
+            android:defaultValue="0"
+            app:argType="integer" />
     </fragment>
+    <fragment
+        android:id="@+id/AddFragment"
+        android:name="com.example.pickup.activitymain.AddFragment"
+        tools:layout="@layout/fragment_add">
+        <action
+            android:id="@+id/action_AddFragment_to_ReceivedFragment"
+            app:destination="@id/ReceivedFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/packageFragment"
+        android:name="com.example.pickup.activitymain.PackageFragment"
+        android:label="Your packages"
+        tools:layout="@layout/fragment_package">
+        <action
+            android:id="@+id/action_packageFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/ReceivedFragment"
+        android:name="com.example.pickup.activitymain.ReceivedFragment"
+        tools:layout="@layout/fragment_received">
+        <action
+            android:id="@+id/action_ReceivedFragment_to_AddFragment"
+            app:destination="@id/AddFragment" />
+        <action
+            android:id="@+id/action_ReceivedFragment_to_HomeFragment"
+            app:destination="@id/HomeFragment" />
+    </fragment>
+
 </navigation>

@@ -34,7 +34,6 @@ class MainActivity : AppCompatActivity() {
 
     private fun initNavigation() {
         val navController = findNavController(R.id.nav_host_fragment)
-
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
     }

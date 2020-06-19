@@ -1,6 +1,5 @@
 package com.example.pickup.activitymain
 
-import android.content.Intent
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -8,15 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.os.bundleOf
-import androidx.fragment.app.FragmentFactory
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.example.pickup.R
-import com.example.pickup.activitypackage.PackageActivity
-import com.example.pickup.activityreceived.ReceivedActivity
 import com.example.pickup.model.User
 import com.example.pickup.viewmodels.MainActivityViewModel
 
@@ -47,12 +41,13 @@ class HomeFragment : Fragment() {
 
     }
 
-    private fun checkIfUser(intent: Intent) {
+    private fun checkIfUser(pick: Int, navigate: Int) {
         if (this.user == null) {
-            INTENT = intent
-            findNavController().navigate(R.id.action_homeFragment_to_AdressFragment)
+            val action = HomeFragmentDirections.actionHomeFragmentToAdressFragment(navigate)
+            findNavController().navigate(action)
         } else {
-            activity?.startActivity(intent)
+            findNavController().navigate(pick)
+//            activity?.startActivity(intent)
         }
     }
 
@@ -60,17 +55,21 @@ class HomeFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         view.findViewById<ImageView>(R.id.ivPackage).setOnClickListener {
-            val intent = Intent(activity, PackageActivity::class.java)
-            checkIfUser(intent)
+            checkIfUser(R.id.action_HomeFragment_to_packageFragment, 1)
         }
 
         view.findViewById<ImageView>(R.id.ivStorage).setOnClickListener {
-            val intent = Intent(activity, ReceivedActivity::class.java)
-            checkIfUser(intent)
+            checkIfUser(R.id.action_HomeFragment_to_ReceivedFragment, 2)
         }
     }
 
     companion object {
-        var INTENT: Intent? = null
+        @JvmStatic
+        fun toFragment(fragmentNumber: Int) =
+            AddFragment().apply {
+                arguments = Bundle().apply {
+                    putInt("TEST", fragmentNumber)
+                }
+            }
     }
 }
