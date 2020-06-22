@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pickup.R
 import com.example.pickup.model.PackageItem
 import kotlinx.android.synthetic.main.received_package_item.view.*
+import java.text.SimpleDateFormat
+
+import java.util.*
 
 class ReceivedPackageAdapter(
     private val packages: List<PackageItem>,
@@ -15,6 +18,9 @@ class ReceivedPackageAdapter(
 ) : RecyclerView.Adapter<ReceivedPackageAdapter.ViewHolder>() {
 
     private lateinit var context: Context
+    private val format = SimpleDateFormat("EEE MMM dd HH:mm:ss zXXX yyyy", Locale.ENGLISH)
+    private val format1 = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
@@ -34,16 +40,23 @@ class ReceivedPackageAdapter(
         }
 
         fun bind(packageItem: PackageItem) {
-            itemView.tvPackageName.text = packageItem.packageName
+            itemView.tvPackageName.text =
+                itemView.context.getString(R.string.PackageName, packageItem.packageName)
             itemView.tvOwnerPostalCode.text =
                 itemView.context.getString(R.string.PostalCodeReceived, packageItem.ownerPostalCode)
             itemView.tvOwnerHomeNumber.text = itemView.context.getString(
                 R.string.HomeNumberReceived,
                 packageItem.ownerHomeNumber.toString()
             )
+//            val date: Date = packageItem.pickUpTime
+//            val string: String = packageItem.pickUpTime.toString()
+//            println(date)
+//            val d = format.parse("Wed Mar 30 00:00:00 GMT+05:30 2016")
+//            format1.parse(d.toString())
+
             itemView.tvPickUpTime.text = itemView.context.getString(
                 R.string.PickupReceivedTime,
-                packageItem.pickUpTime.toString()
+                packageItem.pickUpTime
             )
             itemView.tfCanMakePickup.text = packageItem.willPickUp.toString()
         }

@@ -27,6 +27,7 @@
     <string name="PickupOwnerTime">Pick up Time: %s</string>
 
     <!--Received Adapter -->
+    <string name="PackageName"> Package: %s</string>
     <string name="PostalCodeReceived">Owner Postal: %s </string>
     <string name="HomeNumberReceived">\tAnd HomeNumber: %s</string>
     <string name="PickupReceivedTime">Pick up Time: %s</string>

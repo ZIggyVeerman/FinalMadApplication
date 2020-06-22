@@ -43,6 +43,7 @@
     <fragment
         android:id="@+id/AddFragment"
         android:name="com.example.pickup.activitymain.AddFragment"
+        android:label="Add new package"
         tools:layout="@layout/fragment_add">
         <action
             android:id="@+id/action_AddFragment_to_ReceivedFragment"
@@ -60,6 +61,7 @@
     <fragment
         android:id="@+id/ReceivedFragment"
         android:name="com.example.pickup.activitymain.ReceivedFragment"
+        android:label="Received package"
         tools:layout="@layout/fragment_received">
         <action
             android:id="@+id/action_ReceivedFragment_to_AddFragment"
