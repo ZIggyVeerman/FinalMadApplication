@@ -1,13 +1,17 @@
 package com.example.pickup.activitymain
 
+import android.content.Intent
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.pickup.R
 import com.example.pickup.adapters.OwnerPackageAdapter
@@ -27,6 +31,7 @@ class PackageFragment : Fragment() {
     private lateinit var viewModel: OwnerActivityViewModel
     private val viewModelMain: MainActivityViewModel by viewModels()
     private lateinit var user: User
+    private val args: PackageFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,12 +44,25 @@ class PackageFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_package, container, false)
     }
 
+    override fun onResume() {
+        super.onResume()
+
+        if (args.DateTime != 0) {
+            println("dingen")
+        }
+    }
+
     private fun onYesClick(overviewItem: PackageOverviewResponse) {
-        println(overviewItem.packages[0].packageName)
+        viewModel.handleYes(
+            overviewItem.postalCode,
+            overviewItem.homeNumber,
+            overviewItem.packages[0].ownerPostalCode,
+            overviewItem.packages[0].ownerHomeNumber
+        )
     }
 
     private fun onNoClick(overviewItem: PackageOverviewResponse) {
-        println(overviewItem.packages[0].packageName)
+        findNavController().navigate(R.id.action_packageFragment_to_editTimeDialogFragment)
     }
 
     private fun initViews() {
@@ -66,4 +84,6 @@ class PackageFragment : Fragment() {
             initViews()
         })
     }
+
+
 }

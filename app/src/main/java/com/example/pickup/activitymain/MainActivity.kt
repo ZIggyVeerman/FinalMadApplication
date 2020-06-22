@@ -4,18 +4,14 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import android.view.Menu
 import android.view.MenuItem
-import androidx.activity.viewModels
-import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.example.pickup.R
-import com.example.pickup.model.User
 import com.example.pickup.viewmodels.MainActivityViewModel
 
 import kotlinx.android.synthetic.main.activity_main.*
-import java.util.EnumSet.of
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainActivityViewModel: MainActivityViewModel

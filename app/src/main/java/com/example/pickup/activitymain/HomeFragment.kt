@@ -47,7 +47,6 @@ class HomeFragment : Fragment() {
             findNavController().navigate(action)
         } else {
             findNavController().navigate(pick)
-//            activity?.startActivity(intent)
         }
     }
 
@@ -61,15 +60,5 @@ class HomeFragment : Fragment() {
         view.findViewById<ImageView>(R.id.ivStorage).setOnClickListener {
             checkIfUser(R.id.action_HomeFragment_to_ReceivedFragment, 2)
         }
-    }
-
-    companion object {
-        @JvmStatic
-        fun toFragment(fragmentNumber: Int) =
-            AddFragment().apply {
-                arguments = Bundle().apply {
-                    putInt("TEST", fragmentNumber)
-                }
-            }
     }
 }
