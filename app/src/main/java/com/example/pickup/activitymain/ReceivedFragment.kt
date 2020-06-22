@@ -20,8 +20,6 @@ import com.example.pickup.model.PackageItem
 import com.example.pickup.model.User
 import com.example.pickup.viewmodels.MainActivityViewModel
 import com.example.pickup.viewmodels.ReceivedActivityViewModel
-import kotlinx.android.synthetic.main.activity_received.fab
-import kotlinx.android.synthetic.main.content_received.rvReceivedPackages
 import kotlinx.android.synthetic.main.fragment_received.*
 
 class ReceivedFragment : Fragment() {

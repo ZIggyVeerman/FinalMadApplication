@@ -6,12 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pickup.R
-import com.example.pickup.model.PackageItem
 import com.example.pickup.model.PackageOverviewResponse
 import kotlinx.android.synthetic.main.owner_package_item.view.*
 
 class OwnerPackageAdapter(
-    private val overview: ArrayList<PackageOverviewResponse>
+    private val overview: ArrayList<PackageOverviewResponse>,
+    private val yesClick: ((PackageOverviewResponse) -> Unit),
+    private val noClick: ((PackageOverviewResponse) -> Unit)
 ) : RecyclerView.Adapter<OwnerPackageAdapter.ViewHolder>() {
 
     private lateinit var context: Context
@@ -19,7 +20,7 @@ class OwnerPackageAdapter(
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
-    ): OwnerPackageAdapter.ViewHolder {
+    ): ViewHolder {
         context = parent.context
         return ViewHolder(
             LayoutInflater.from(context).inflate(R.layout.owner_package_item, parent, false)
@@ -32,6 +33,20 @@ class OwnerPackageAdapter(
         holder.bind(overview[position])
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
+        init {
+            itemView.btYes.setOnClickListener {
+                it.setOnClickListener {
+                    yesClick(overview[adapterPosition])
+                }
+            }
+
+            itemView.btNo.setOnClickListener {
+                it.setOnClickListener {
+                    noClick(overview[adapterPosition])
+                }
+            }
+        }
+
 
         fun bind(packageItem: PackageOverviewResponse) {
             itemView.tvPickupPostal.text = packageItem.postalCode

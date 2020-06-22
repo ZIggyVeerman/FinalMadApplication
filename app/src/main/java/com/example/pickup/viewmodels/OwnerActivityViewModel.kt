@@ -12,7 +12,6 @@ class OwnerActivityViewModel : ViewModel() {
     private val packageInfoRepository = PackageInfoRepository()
 
     val overview = packageInfoRepository.ownerPackageItem
-//    val packages = packageInfoRepository.packageItem
 
     private val _errorText: MutableLiveData<String> = MutableLiveData()
 

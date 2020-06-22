@@ -76,14 +76,14 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/btNo"
+                android:id="@+id/btYes"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/yes" />
 
             <Button
-                android:id="@+id/btYes"
+                android:id="@+id/btNo"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

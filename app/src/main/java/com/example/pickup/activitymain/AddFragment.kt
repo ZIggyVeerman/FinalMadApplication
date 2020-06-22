@@ -16,9 +16,6 @@ import com.example.pickup.R
 import com.example.pickup.model.User
 import com.example.pickup.viewmodels.MainActivityViewModel
 import com.example.pickup.viewmodels.ReceivedActivityViewModel
-import kotlinx.android.synthetic.main.content_add.tifHomeNumber
-import kotlinx.android.synthetic.main.content_add.tifPackageName
-import kotlinx.android.synthetic.main.content_add.tifPostalCode
 import kotlinx.android.synthetic.main.fragment_add.*
 import java.lang.Error
 import java.text.SimpleDateFormat
