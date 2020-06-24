@@ -2,6 +2,7 @@ package com.example.pickup.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
@@ -38,17 +39,21 @@ class OwnerPackageAdapter(
 
     inner class ViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         init {
-            itemView.btYes.setOnClickListener {
-                it.setOnClickListener {
-                    yesClick(overview[adapterPosition])
+            itemView.btYes.setOnTouchListener(View.OnTouchListener { v, event ->
+                when (event?.action) {
+                    MotionEvent.ACTION_DOWN -> yesClick(overview[adapterPosition])
                 }
-            }
 
-            itemView.btNo.setOnClickListener {
-                it.setOnClickListener {
-                    noClick(overview[adapterPosition])
+                return@OnTouchListener v?.onTouchEvent(event) ?: true
+            })
+
+            itemView.btNo.setOnTouchListener(View.OnTouchListener { v, event ->
+                when (event?.action) {
+                    MotionEvent.ACTION_DOWN -> noClick(overview[adapterPosition])
                 }
-            }
+
+                return@OnTouchListener v?.onTouchEvent(event) ?: true
+            })
         }
 
 

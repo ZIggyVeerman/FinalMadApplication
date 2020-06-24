@@ -4,10 +4,8 @@ import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Build
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.annotation.RequiresApi
 import androidx.fragment.app.viewModels
@@ -43,6 +41,8 @@ class AddFragment : Fragment() {
     ): View? {
         // inflate the viewmodel
         observeViewModel()
+
+        setHasOptionsMenu(true)
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_add, container, false)
@@ -152,6 +152,26 @@ class AddFragment : Fragment() {
     private fun startReceivedActivity() {
         findNavController().navigate(R.id.action_AddFragment_to_ReceivedFragment)
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.empty, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        return when (item.itemId) {
+            android.R.id.home -> {
+                findNavController().navigate(R.id.action_AddFragment_to_ReceivedFragment)
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 
     companion object {
         const val PACKAGENAME = "Geef een titel"

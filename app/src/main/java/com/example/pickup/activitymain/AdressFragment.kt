@@ -1,10 +1,8 @@
 package com.example.pickup.activitymain
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Button
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
@@ -39,6 +37,8 @@ class AdressFragment : Fragment() {
             .get(OwnerActivityViewModel::class.java)
 
         pick = args.myArg
+
+        setHasOptionsMenu(true)
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_adress, container, false)
@@ -88,6 +88,26 @@ class AdressFragment : Fragment() {
     private fun customToast(toast: String) {
         Toast.makeText(activity, toast, Toast.LENGTH_SHORT).show()
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.empty, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        return when (item.itemId) {
+            android.R.id.home -> {
+                findNavController().navigate(R.id.action_AdressFragment_to_HomeFragment)
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 
     companion object {
         const val POSTALCODE = "Geef een postecode"
