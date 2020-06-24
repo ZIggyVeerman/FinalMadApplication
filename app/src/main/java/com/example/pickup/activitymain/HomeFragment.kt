@@ -1,10 +1,8 @@
 package com.example.pickup.activitymain
 
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.ImageView
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
@@ -27,6 +25,8 @@ class HomeFragment : Fragment() {
     ): View? {
         // inflate the viewModel
         observeViewModel()
+
+        setHasOptionsMenu(true)
 
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_home, container, false)
@@ -61,4 +61,29 @@ class HomeFragment : Fragment() {
             checkIfUser(R.id.action_HomeFragment_to_ReceivedFragment, 2)
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_main, menu)
+
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    private fun deleteUserData() {
+        viewModel.deleteAllUsers()
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        return when (item.itemId) {
+            R.id.action_delete_user -> {
+                deleteUserData()
+                return true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
+
 }

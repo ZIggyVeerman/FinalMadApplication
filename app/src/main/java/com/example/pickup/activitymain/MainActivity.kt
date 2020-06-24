@@ -27,33 +27,9 @@ class MainActivity : AppCompatActivity() {
         initNavigation()
     }
 
-    private fun deleteUserData() {
-        mainActivityViewModel.deleteAllUsers()
-    }
-
     private fun initNavigation() {
         val navController = findNavController(R.id.nav_host_fragment)
         val appBarConfiguration = AppBarConfiguration(navController.graph)
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration)
     }
-
-//    override fun onCreateOptionsMenu(menu: Menu): Boolean {
-//        // Inflate the menu; this adds items to the action bar if it is present.
-//        menuInflater.inflate(R.menu.menu_main, menu)
-//        return true
-//    }
-//
-//    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-//        // Handle action bar item clicks here. The action bar will
-//        // automatically handle clicks on the Home/Up button, so long
-//        // as you specify a parent activity in AndroidManifest.xml.
-//        val navController = findNavController(R.id.nav_host_fragment)
-//        return when (item.itemId) {
-//            R.id.action_delete_user -> {
-//                deleteUserData()
-//                return true
-//            }
-//            else -> super.onOptionsItemSelected(item)
-//        }
-//    }
 }
