@@ -8,6 +8,9 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.pickup.R
 import com.example.pickup.model.PackageOverviewResponse
 import kotlinx.android.synthetic.main.owner_package_item.view.*
+import java.text.SimpleDateFormat
+import java.util.*
+import kotlin.collections.ArrayList
 
 class OwnerPackageAdapter(
     private val overview: ArrayList<PackageOverviewResponse>,
@@ -16,6 +19,7 @@ class OwnerPackageAdapter(
 ) : RecyclerView.Adapter<OwnerPackageAdapter.ViewHolder>() {
 
     private lateinit var context: Context
+    private val format = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -49,11 +53,18 @@ class OwnerPackageAdapter(
 
 
         fun bind(packageItem: PackageOverviewResponse) {
-            itemView.tvPickupPostal.text = packageItem.postalCode
-            itemView.tvPickupHomeNumber.text = packageItem.homeNumber.toString()
+            itemView.tvPickupPostal.text =
+                context.getString(R.string.PostalCodeOwner, packageItem.postalCode)
+            itemView.tvPickupHomeNumber.text =
+                context.getString(R.string.HomeNumberOwner, packageItem.homeNumber.toString())
             packageItem.packages.forEach { element ->
-                itemView.tvPackageName.text = element.packageName
-                itemView.tvPickUpTime.text = element.pickUpTime.toString()
+                itemView.tvPackageName.text =
+                    context.getString(R.string.PackageName, element.packageName)
+                itemView.tvPickUpTime.text =
+                    context.getString(
+                        R.string.PickupReceivedTime,
+                        format.format(element.pickUpTime)
+                    )
             }
         }
     }

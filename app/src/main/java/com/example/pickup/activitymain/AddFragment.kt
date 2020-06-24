@@ -88,7 +88,6 @@ class AddFragment : Fragment() {
 
     private fun savePackage() {
         if (checkFields()) {
-            println(this.user.homeNumber)
             viewModel.addNewPackage(
                 this.user.postalCode,
                 this.user.homeNumber,

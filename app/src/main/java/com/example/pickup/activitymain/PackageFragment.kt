@@ -1,12 +1,12 @@
 package com.example.pickup.activitymain
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -17,6 +17,7 @@ import com.example.pickup.R
 import com.example.pickup.adapters.OwnerPackageAdapter
 import com.example.pickup.model.PackageOverviewResponse
 import com.example.pickup.model.User
+import com.example.pickup.viewmodels.DialogViewModel
 import com.example.pickup.viewmodels.MainActivityViewModel
 import com.example.pickup.viewmodels.OwnerActivityViewModel
 import kotlinx.android.synthetic.main.fragment_package.*
@@ -29,6 +30,7 @@ class PackageFragment : Fragment() {
         }, { overViewItem: PackageOverviewResponse -> onNoClick(overViewItem) }
         )
     private lateinit var viewModel: OwnerActivityViewModel
+    private lateinit var dialogViewModel: DialogViewModel
     private val viewModelMain: MainActivityViewModel by viewModels()
     private lateinit var user: User
     private val args: PackageFragmentArgs by navArgs()
@@ -46,9 +48,8 @@ class PackageFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
-
-        if (args.DateTime != 0) {
-            println("dingen")
+        if (args.confirm == 100) {
+            Toast.makeText(context, "New time has been send", Toast.LENGTH_SHORT).show()
         }
     }
 
@@ -62,6 +63,12 @@ class PackageFragment : Fragment() {
     }
 
     private fun onNoClick(overviewItem: PackageOverviewResponse) {
+        dialogViewModel.storeFields(
+            overviewItem.packages[0].ownerPostalCode,
+            overviewItem.packages[0].ownerHomeNumber,
+            overviewItem.postalCode,
+            overviewItem.homeNumber
+        )
         findNavController().navigate(R.id.action_packageFragment_to_editTimeDialogFragment)
     }
 
@@ -74,6 +81,8 @@ class PackageFragment : Fragment() {
 
     private fun observeViewModel() {
         viewModel = ViewModelProvider(this).get(OwnerActivityViewModel::class.java)
+        dialogViewModel =
+            ViewModelProvider(activity as AppCompatActivity).get(DialogViewModel::class.java)
         viewModel.overview.observe(viewLifecycleOwner, Observer { list ->
             overview.clear()
             overview.addAll(list)

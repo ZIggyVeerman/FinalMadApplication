@@ -58,7 +58,7 @@
             android:id="@+id/action_packageFragment_to_HomeFragment"
             app:destination="@id/HomeFragment" />
         <argument
-            android:name="DateTime"
+            android:name="confirm"
             android:defaultValue="0"
             app:argType="integer" />
         <action

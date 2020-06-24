@@ -9,18 +9,21 @@ import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI
 import com.example.pickup.R
+import com.example.pickup.viewmodels.DialogViewModel
 import com.example.pickup.viewmodels.MainActivityViewModel
 
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     private lateinit var mainActivityViewModel: MainActivityViewModel
+    private lateinit var dialogViewModel: DialogViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         setSupportActionBar(toolbar)
         mainActivityViewModel = ViewModelProvider(this).get(MainActivityViewModel::class.java)
+        dialogViewModel = ViewModelProvider(this).get(DialogViewModel::class.java)
         initNavigation()
     }
 

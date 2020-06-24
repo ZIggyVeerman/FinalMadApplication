@@ -18,9 +18,7 @@ class ReceivedPackageAdapter(
 ) : RecyclerView.Adapter<ReceivedPackageAdapter.ViewHolder>() {
 
     private lateinit var context: Context
-    private val format = SimpleDateFormat("EEE MMM dd HH:mm:ss zXXX yyyy", Locale.ENGLISH)
-    private val format1 = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
-
+    private val format = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ViewHolder {
         context = parent.context
@@ -48,17 +46,21 @@ class ReceivedPackageAdapter(
                 R.string.HomeNumberReceived,
                 packageItem.ownerHomeNumber.toString()
             )
-//            val date: Date = packageItem.pickUpTime
-//            val string: String = packageItem.pickUpTime.toString()
-//            println(date)
-//            val d = format.parse("Wed Mar 30 00:00:00 GMT+05:30 2016")
-//            format1.parse(d.toString())
+            println(packageItem.pickUpTime.toString())
 
             itemView.tvPickUpTime.text = itemView.context.getString(
                 R.string.PickupReceivedTime,
-                packageItem.pickUpTime
+                format.format(packageItem.pickUpTime)
             )
-            itemView.tfCanMakePickup.text = packageItem.willPickUp.toString()
+            if (!packageItem.willPickUp) {
+                itemView.tfCanMakePickup.text = itemView.context.getString(
+                    R.string.willPickUp, "No"
+                )
+            } else {
+                itemView.tfCanMakePickup.text = itemView.context.getString(
+                    R.string.willPickUp, "Yes"
+                )
+            }
         }
     }
 

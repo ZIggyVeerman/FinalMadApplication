@@ -23,17 +23,18 @@
 
     <!--ownerAdapter -->
     <string name="PostalCodeOwner">Pick up PostalCode: %s </string>
-    <string name="HomeNumberOwner">And HomeNumber: %s</string>
+    <string name="HomeNumberOwner">\u0020And HomeNumber: %s</string>
     <string name="PickupOwnerTime">Pick up Time: %s</string>
 
     <!--Received Adapter -->
     <string name="PackageName"> Package: %s</string>
     <string name="PostalCodeReceived">Owner Postal: %s </string>
-    <string name="HomeNumberReceived">\tAnd HomeNumber: %s</string>
+    <string name="HomeNumberReceived">\u0020And HomeNumber: %s</string>
     <string name="PickupReceivedTime">Pick up Time: %s</string>
     <string name="can_you_make_the_pick_up">Can you make the pick up?</string>
     <string name="no">No</string>
     <string name="yes">Yes</string>
+    <string name="willPickUp">Owner will pick up: %s</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
