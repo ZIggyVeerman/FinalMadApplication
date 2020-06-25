@@ -9,7 +9,7 @@
 
     <string name="title_activity_add">Add Package</string>
     <string name="title_activity_received_package">ReceivedPackage</string>
-    <string name="your_package">Your Package</string>
+    <string name="your_package">My Package</string>
     <string name="received_package">Received Package</string>
     <string name="your_postalcode">Your PostalCode</string>
     <string name="_1234aa">1234AA</string>

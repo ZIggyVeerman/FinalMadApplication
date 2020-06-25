@@ -56,7 +56,8 @@ class AddFragment : Fragment() {
             val datePickerDialog = context?.let { context ->
                 DatePickerDialog(
                     context, DatePickerDialog.OnDateSetListener { _, year, month, dayOfMonth ->
-                        tvDate.text = "$dayOfMonth/$month/$year"
+                        val correctMonth = month + 1
+                        tvDate.text = "$dayOfMonth/$correctMonth/$year"
                     },
                     now.get(Calendar.YEAR), now.get(Calendar.MONTH), now.get(Calendar.DAY_OF_MONTH)
                 )
