@@ -12,6 +12,7 @@ import androidx.navigation.findNavController
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.pickup.R
 import com.example.pickup.adapters.OwnerPackageAdapter
 import com.example.pickup.model.PackageOverviewResponse
@@ -20,6 +21,7 @@ import com.example.pickup.viewmodels.DialogViewModel
 import com.example.pickup.viewmodels.MainActivityViewModel
 import com.example.pickup.viewmodels.OwnerActivityViewModel
 import kotlinx.android.synthetic.main.fragment_package.*
+import kotlinx.android.synthetic.main.fragment_received.*
 
 class PackageFragment : Fragment() {
     private val overview = arrayListOf<PackageOverviewResponse>()
@@ -46,6 +48,17 @@ class PackageFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_package, container, false)
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
+        val swipeContainer: SwipeRefreshLayout = view.findViewById(R.id.swiperefreshing)
+
+        swipeContainer.setOnRefreshListener {
+            observeViewModel()
+            swiperefreshing.isRefreshing = false
+        }
+    }
+
     override fun onResume() {
         super.onResume()
         if (args.confirm == 100) {
@@ -60,6 +73,7 @@ class PackageFragment : Fragment() {
             overviewItem.packages[0].ownerPostalCode,
             overviewItem.packages[0].ownerHomeNumber
         )
+        observeViewModel()
     }
 
     private fun onNoClick(overviewItem: PackageOverviewResponse) {

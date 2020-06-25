@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <com.google.android.material.card.MaterialCardView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/materialCardView"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -79,24 +80,26 @@
 
             <Button
                 android:id="@+id/btYes"
-                android:layout_width="5dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0"
                 android:text="@string/yes" />
+
+            <View
+                android:id="@+id/divider"
+                android:layout_width="10dp"
+                android:layout_height="0dp"
+                android:layout_weight="0"
+                android:background="?android:attr/listDivider"
+                android:visibility="invisible" />
 
             <Button
                 android:id="@+id/btNo"
-                android:layout_width="5dp"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
+                android:layout_weight="0"
                 android:text="@string/no" />
 
-            <View
-                android:id="@+id/divider5"
-                android:layout_width="50dp"
-                android:layout_height="1dp"
-                android:layout_weight="1"
-                android:background="?android:attr/listDivider" />
         </LinearLayout>
 
     </LinearLayout>

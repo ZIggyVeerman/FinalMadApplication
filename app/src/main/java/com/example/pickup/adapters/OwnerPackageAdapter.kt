@@ -1,17 +1,15 @@
 package com.example.pickup.adapters
 
 import android.content.Context
-import android.view.LayoutInflater
-import android.view.MotionEvent
-import android.view.View
-import android.view.ViewGroup
+import android.view.*
+import androidx.core.view.isInvisible
 import androidx.recyclerview.widget.RecyclerView
 import com.example.pickup.R
 import com.example.pickup.model.PackageOverviewResponse
 import kotlinx.android.synthetic.main.owner_package_item.view.*
 import java.text.SimpleDateFormat
 import java.util.*
-import kotlin.collections.ArrayList
+
 
 class OwnerPackageAdapter(
     private val overview: ArrayList<PackageOverviewResponse>,
@@ -56,7 +54,6 @@ class OwnerPackageAdapter(
             })
         }
 
-
         fun bind(packageItem: PackageOverviewResponse) {
             itemView.tvPickupPostal.text =
                 context.getString(R.string.PostalCodeOwner, packageItem.postalCode)
@@ -70,6 +67,14 @@ class OwnerPackageAdapter(
                         R.string.PickupReceivedTime,
                         format.format(element.pickUpTime)
                     )
+                if (element.willPickUp) {
+                    itemView.btNo.visibility = View.GONE
+                    itemView.btYes.visibility = View.GONE
+                    itemView.tfCanMakePickup.text = "Do not forget to pick-up your package"
+                } else {
+                    itemView.btNo.visibility = View.VISIBLE
+                    itemView.btYes.visibility = View.VISIBLE
+                }
             }
         }
     }
