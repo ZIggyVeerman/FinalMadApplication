@@ -10,7 +10,6 @@ import com.example.pickup.model.User
 @Dao
 interface UserDao {
 
-    //TODO JUISTE QUERY MAKEN
     @Query("SELECT * FROM user_table")
     fun getUser(): LiveData<User>
 

@@ -70,7 +70,7 @@ class OwnerPackageAdapter(
                 if (element.willPickUp) {
                     itemView.btNo.visibility = View.GONE
                     itemView.btYes.visibility = View.GONE
-                    itemView.tfCanMakePickup.text = "Do not forget to pick-up your package"
+                    itemView.tfCanMakePickup.text = context.getString(R.string.ForgetPickup)
                 } else {
                     itemView.btNo.visibility = View.VISIBLE
                     itemView.btYes.visibility = View.VISIBLE

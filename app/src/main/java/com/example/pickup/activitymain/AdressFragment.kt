@@ -52,7 +52,6 @@ class AdressFragment : Fragment() {
             ownerActivityViewModel.addNewUser(postalCode, homeNumber)
 
             when (args.myArg) {
-                //TODO TOAST
                 0 -> println("iets ging fout")
                 1 -> findNavController().navigate(R.id.action_AdressFragment_to_packageFragment)
                 2 -> findNavController().navigate(R.id.action_AdressFragment_to_ReceivedFragment)

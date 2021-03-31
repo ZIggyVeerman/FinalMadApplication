@@ -1,5 +1,6 @@
 package com.example.pickup.activitymain
 
+import android.annotation.SuppressLint
 import android.app.DatePickerDialog
 import android.app.TimePickerDialog
 import android.os.Build
@@ -48,6 +49,7 @@ class AddFragment : Fragment() {
         return inflater.inflate(R.layout.fragment_add, container, false)
     }
 
+    @SuppressLint("SetTextI18n")
     @RequiresApi(Build.VERSION_CODES.N)
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -82,7 +84,7 @@ class AddFragment : Fragment() {
     }
 
     private fun observeViewModel() {
-        viewModelMain.user?.observe(viewLifecycleOwner, androidx.lifecycle.Observer { user ->
+        viewModelMain.user?.observe(viewLifecycleOwner, { user ->
             this.user = user
         })
     }
